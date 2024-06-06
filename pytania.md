@@ -25,7 +25,7 @@ Wydaje mi się, że projekt nabrałby dodatkowej przejrzystości, gdyby jako prz
 
 - nie o 4 tylko o 5, uruchamianie dodawanie do list na początku - trzeba dodać
 
-11. dodatkowo trzeba napisać jakąś funkcję, która już na początku dodawałaby część gier do HOT/LAME, bo taką sytuację mamy chociażby z River Raid, które powinno być w HOT od początku.
+\*11. dodatkowo trzeba napisać jakąś funkcję, która już na początku dodawałaby część gier do HOT/LAME, bo taką sytuację mamy chociażby z River Raid, które powinno być w HOT od początku.
 
 12. przepisać reduxa z createStore na configureStore
 

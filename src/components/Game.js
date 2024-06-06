@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import useSelection from "../hooks/useSelection";
 import Button from "./Button";
+import { ListLabel } from "../constants/listLabels";
 
 export default function Game({ id }) {
   const { gameById: game } = useSelection(id);
@@ -34,6 +35,7 @@ export default function Game({ id }) {
     });
     if (result === 0 && !isLame) {
       addToLameList();
+      showBadgeNew(ListLabel.LAME);
     }
     if (result === 5 && isHot) {
       removeFromHotList();
@@ -47,6 +49,7 @@ export default function Game({ id }) {
     });
     if (result === 4 && !isHot) {
       addToHotList();
+      showBadgeNew(ListLabel.HOT);
     }
     if (result === -1 && isLame) {
       removeFromLameList();
@@ -87,6 +90,7 @@ export default function Game({ id }) {
         type: "ADD_TO_FAVOURITE",
         payload: id,
       });
+      showBadgeNew(ListLabel.FAVOURITE);
     } else {
       dispatch({
         type: "REMOVE_FROM_FAVOURITE",
@@ -101,6 +105,7 @@ export default function Game({ id }) {
         type: "ADD_TO_PLAYED",
         payload: id,
       });
+      showBadgeNew(ListLabel.PLAYED);
     } else {
       dispatch({
         type: "REMOVE_FROM_PLAYED",
@@ -115,12 +120,20 @@ export default function Game({ id }) {
         type: "ADD_TO_FINISHED",
         payload: id,
       });
+      showBadgeNew(ListLabel.FINISHED);
     } else {
       dispatch({
         type: "REMOVE_FROM_FINISHED",
         payload: id,
       });
     }
+  }
+
+  function showBadgeNew(listName) {
+    dispatch({
+      type: "SHOW_BADGE_NEW",
+      listName,
+    });
   }
 
   return (

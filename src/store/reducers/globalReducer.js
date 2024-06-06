@@ -217,6 +217,7 @@ const initState = {
     ListLabel.PLAYED,
     ListLabel.FINISHED,
   ],
+  badgeNew: new Set(),
 };
 
 export const gameReducer = (state = initState, action) => {
@@ -309,6 +310,21 @@ export const gameReducer = (state = initState, action) => {
           game.id === action.payload ? { ...game, isFinished: false } : game
         ),
       };
+    case "SHOW_BADGE_NEW":
+      return {
+        ...state,
+        badgeNew: new Set(state.badgeNew).add(action.listName),
+      };
+    case "HIDE_BADGE_NEW":
+      if (state.badgeNew.has(action.listName)) {
+        const updatedBadgeNew = new Set(state.badgeNew);
+        updatedBadgeNew.delete(action.listName);
+        return {
+          ...state,
+          badgeNew: updatedBadgeNew,
+        };
+      }
+      return state;
     default:
       return state;
   }
