@@ -1,7 +1,9 @@
-import useSelection from "../hooks/useSelection";
 import { Link } from "react-router-dom";
-import Button from "./Button";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+import useSelection from "../hooks/useSelection";
+import Button from "./Button";
 
 export default function Game({ id }) {
   const { gameById: game } = useSelection(id);
@@ -15,12 +17,40 @@ export default function Game({ id }) {
 
   const dispatch = useDispatch();
 
-  if (result > 5 && !isHot) {
-    addToHotList();
+  useEffect(() => {
+    if (result >= 5 && !isHot) {
+      addToHotList();
+    }
+
+    if (result < 0 && !isLame) {
+      addToLameList();
+    }
+  }, []);
+
+  function handleDownVotes() {
+    dispatch({
+      type: "INCREASE_DOWNVOTES",
+      payload: id,
+    });
+    if (result === 0 && !isLame) {
+      addToLameList();
+    }
+    if (result === 5 && isHot) {
+      removeFromHotList();
+    }
   }
 
-  if (result < 0 && !isLame) {
-    addToLameList();
+  function handleUpVotes() {
+    dispatch({
+      type: "INCREASE_UPVOTES",
+      payload: id,
+    });
+    if (result === 4 && !isHot) {
+      addToHotList();
+    }
+    if (result === -1 && isLame) {
+      removeFromLameList();
+    }
   }
 
   function addToHotList() {
@@ -33,6 +63,20 @@ export default function Game({ id }) {
   function addToLameList() {
     dispatch({
       type: "ADD_TO_LAME",
+      payload: id,
+    });
+  }
+
+  function removeFromHotList() {
+    dispatch({
+      type: "REMOVE_FROM_HOT",
+      payload: id,
+    });
+  }
+
+  function removeFromLameList() {
+    dispatch({
+      type: "REMOVE_FROM_LAME",
       payload: id,
     });
   }
@@ -93,9 +137,9 @@ export default function Game({ id }) {
       </Link>
       <div>
         <div>
-          <Button text={`Downs: ${downVotes}`} />
+          <Button text={`Downs: ${downVotes}`} onClick={handleDownVotes} />
           <span>{result}</span>
-          <Button text={`Likes: ${upVotes}`} />
+          <Button text={`Likes: ${upVotes}`} onClick={handleUpVotes} />
         </div>
       </div>
     </div>

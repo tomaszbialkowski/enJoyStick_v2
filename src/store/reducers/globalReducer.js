@@ -221,6 +221,24 @@ const initState = {
 
 export const gameReducer = (state = initState, action) => {
   switch (action.type) {
+    case "INCREASE_DOWNVOTES":
+      return {
+        ...state,
+        games: state.games.map((game) =>
+          game.id === action.payload
+            ? { ...game, downVotes: game.downVotes + 1 }
+            : game
+        ),
+      };
+    case "INCREASE_UPVOTES":
+      return {
+        ...state,
+        games: state.games.map((game) =>
+          game.id === action.payload
+            ? { ...game, upVotes: game.upVotes + 1 }
+            : game
+        ),
+      };
     case "ADD_TO_HOT":
       return {
         ...state,
