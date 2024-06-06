@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import RouterConfig from "./router/RouterConfig";
 
-function App() {
+import Header from "./components/Header";
+import Logo from "./components/Logo";
+import SearchBar from "./components/SearchBar";
+import Lists from "./components/Lists";
+import Footer from "./components/Footer";
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header>
+        <Logo />
+        <SearchBar />
+      </Header>
+      <div className="container__main">
+        <Lists />
+        <main className="container__main--gameslist">
+          <RouterConfig />
+        </main>
+      </div>
+      <Footer />
     </div>
   );
 }
-
-export default App;
