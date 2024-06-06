@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import Button from "./Button";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { REACT_APP_OMDB_API_KEY } from "../constants/OAK";
+import Button from "./Button";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
@@ -30,8 +31,6 @@ export default function SearchBar() {
         );
         const data = await res.json();
 
-        console.log(data);
-
         resultsRef.current = data.Search.map((game) => ({
           cover:
             game.Poster === "N/A" ? "img/image-placeholder.jpg" : game.Poster,
@@ -42,7 +41,6 @@ export default function SearchBar() {
           downvotes: 0,
         }));
 
-        dispatch({ type: "ADD_TO_SEARCH", payload: resultsRef.current });
         dispatch({ type: "ADD_TO_RESULTS", payload: resultsRef.current });
         setQuery("");
         navigate("/search");

@@ -325,6 +325,23 @@ export const gameReducer = (state = initState, action) => {
         };
       }
       return state;
+    case "SHOW_MODAL":
+      return {
+        ...state,
+        info: {
+          show: action.payload.show,
+          text: action.payload.text,
+          type: action.payload.type,
+        },
+      };
+    case "HIDE_MODAL": {
+      return { ...state, info: { ...state.info, show: false } };
+    }
+    case "ADD_TO_RESULTS":
+      return {
+        ...state,
+        searchResults: action.payload,
+      };
     default:
       return state;
   }

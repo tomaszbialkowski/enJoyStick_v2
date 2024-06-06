@@ -36,6 +36,7 @@ export default function Game({ id }) {
     if (result === 0 && !isLame) {
       addToLameList();
       showBadgeNew(ListLabel.LAME);
+      showInfo(true, `Add to ${ListLabel.LAME} list`, "Add");
     }
     if (result === 5 && isHot) {
       removeFromHotList();
@@ -50,6 +51,7 @@ export default function Game({ id }) {
     if (result === 4 && !isHot) {
       addToHotList();
       showBadgeNew(ListLabel.HOT);
+      showInfo(true, `Add to ${ListLabel.HOT} list`, "Add");
     }
     if (result === -1 && isLame) {
       removeFromLameList();
@@ -75,6 +77,7 @@ export default function Game({ id }) {
       type: "REMOVE_FROM_HOT",
       payload: id,
     });
+    showInfo(true, `Remove from ${ListLabel.HOT} list`, "Remove");
   }
 
   function removeFromLameList() {
@@ -82,6 +85,7 @@ export default function Game({ id }) {
       type: "REMOVE_FROM_LAME",
       payload: id,
     });
+    showInfo(true, `Remove from ${ListLabel.LAME} list`, "Remove");
   }
 
   function handleFavouritesList() {
@@ -91,11 +95,13 @@ export default function Game({ id }) {
         payload: id,
       });
       showBadgeNew(ListLabel.FAVOURITE);
+      showInfo(true, `Add from ${ListLabel.FAVOURITE} list`, "Add");
     } else {
       dispatch({
         type: "REMOVE_FROM_FAVOURITE",
         payload: id,
       });
+      showInfo(true, `Remove from ${ListLabel.FAVOURITE} list`, "Remove");
     }
   }
 
@@ -106,11 +112,13 @@ export default function Game({ id }) {
         payload: id,
       });
       showBadgeNew(ListLabel.PLAYED);
+      showInfo(true, `Add from ${ListLabel.PLAYED} list`, "Add");
     } else {
       dispatch({
         type: "REMOVE_FROM_PLAYED",
         payload: id,
       });
+      showInfo(true, `Remove from ${ListLabel.PLAYED} list`, "Remove");
     }
   }
 
@@ -121,11 +129,13 @@ export default function Game({ id }) {
         payload: id,
       });
       showBadgeNew(ListLabel.FINISHED);
+      showInfo(true, `Add from ${ListLabel.FINISHED} list`, "Add");
     } else {
       dispatch({
         type: "REMOVE_FROM_FINISHED",
         payload: id,
       });
+      showInfo(true, `Remove from ${ListLabel.FINISHED} list`, "Remove");
     }
   }
 
@@ -134,6 +144,10 @@ export default function Game({ id }) {
       type: "SHOW_BADGE_NEW",
       listName,
     });
+  }
+
+  function showInfo(show, text, type) {
+    dispatch({ type: "SHOW_MODAL", payload: { show, text, type } });
   }
 
   return (
