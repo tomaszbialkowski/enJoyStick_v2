@@ -46,6 +46,7 @@ export default function Game({ id }) {
     if (result === 5 && isHot) {
       removeFromHotList();
     }
+    if (isHot) hideBadgeNew(ListLabel.HOT);
   }
 
   function handleUpVotes() {
@@ -61,6 +62,7 @@ export default function Game({ id }) {
     if (result === -1 && isLame) {
       removeFromLameList();
     }
+    if (isLame) hideBadgeNew(ListLabel.LAME);
   }
 
   function addToHotList() {
@@ -151,6 +153,13 @@ export default function Game({ id }) {
     });
   }
 
+  function hideBadgeNew(listName) {
+    dispatch({
+      type: "HIDE_BADGE_NEW",
+      listName,
+    });
+  }
+
   function showInfo(show, text, type) {
     dispatch({ type: "SHOW_MODAL", payload: { show, text, type } });
   }
@@ -191,7 +200,7 @@ export default function Game({ id }) {
           <Button text={`Downs: ${downVotes}`} onClick={handleDownVotes} />
           <span>{result}</span>
           <Button text={`Likes: ${upVotes}`} onClick={handleUpVotes} />
-          <Button text="Delete" onClick={handleDeleteGame} />
+          <Button text="❌" onClick={handleDeleteGame} />
         </div>
       </div>
     </div>

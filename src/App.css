@@ -32,8 +32,10 @@ body {
 
 .container__footer {
   width: 100%;
-  background-color: #fff;
+  background-color: #ffffff79;
   text-align: center;
+  position: fixed;
+  bottom: 0;
 }
 
 .container__main--catalogues {
@@ -46,6 +48,9 @@ body {
   scrollbar-width: none;
   scroll-behavior: smooth;
   width: 50%;
+}
+.container__main--gameslist li:last-of-type {
+  margin-bottom: 100px;
 }
 
 img {

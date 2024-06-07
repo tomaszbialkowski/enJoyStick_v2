@@ -1,16 +1,17 @@
 import { REACT_APP_OMDB_API_KEY } from "../constants/OAK";
 import Button from "../components/Button";
 import useSelection from "../hooks/useSelection";
+import Badge from "../components/Badge";
 
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-const SearchResults = () => {
+export default function SearchResults() {
   const [data, setData] = useState([]);
   const location = useLocation();
   const KEY = REACT_APP_OMDB_API_KEY;
-  const [visibleBtnId, setVisibleBtnId] = useState("");
+  const [selectedId, setSelectedId] = useState("");
   const dispatch = useDispatch();
   const { allGames } = useSelection();
 
@@ -44,6 +45,7 @@ const SearchResults = () => {
       showBadgeNew();
     }
   }
+
   function showInfo(show, text, type) {
     dispatch({ type: "SHOW_MODAL", payload: { show, text, type } });
   }
@@ -59,34 +61,49 @@ const SearchResults = () => {
     <div>
       <h3>
         Found
-        {data.length > 1 ? `${data.length} games` : `${data.length}  game`}
+        <Badge text={`${data.length}`} />
+        {data.length > 1 ? " games" : " game"}
       </h3>
       <ul>
         {data.map((game) => (
           <li
             key={game.id}
-            onMouseEnter={() => setVisibleBtnId(game.id)}
-            onMouseLeave={() => setVisibleBtnId(null)}
+            onMouseEnter={() => setSelectedId(game.id)}
+            onMouseLeave={() => setSelectedId(null)}
             style={{ position: "relative" }}
           >
             <h3 style={{ marginBottom: "4px", marginTop: "32px" }}>
               {game.title}
             </h3>
             <img src={game.cover} alt={game.title} />
-            {visibleBtnId === game.id && (
-              <Button
-                text="Add Game to Your Collection"
-                style={{ position: "absolute", top: "45%" }}
-                onClick={() =>
-                  handleClick({ ...game, upVotes: 0, downVotes: 0 })
-                }
-              />
-            )}
+            {selectedId === game.id &&
+              (allGames.some((game) => game.id === selectedId) ? (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "22px",
+                    width: "200px",
+                    backgroundColor: "rgba(255,255,255,0.8)",
+                    height: "100%",
+                    fontWeight: "800",
+                    padding: "8px",
+                    margin: "auto",
+                  }}
+                >
+                  <p>You alredy saved this game to your collection</p>
+                </div>
+              ) : (
+                <Button
+                  text={"Add Game to Your Collection"}
+                  style={{ position: "absolute", top: "45%" }}
+                  onClick={() =>
+                    handleClick({ ...game, upVotes: 0, downVotes: 0 })
+                  }
+                />
+              ))}
           </li>
         ))}
       </ul>
     </div>
   );
-};
-
-export default SearchResults;
+}
