@@ -14,10 +14,11 @@ export default function GamesList() {
     state.games.filter((game) => game[`is${listNameWithUpper}`])
   );
   const { allGames } = useSelection();
-  const games = listName ? gamesByUrl : allGames;
+  const games = listName ? gamesByUrl.reverse() : [...allGames].reverse();
 
   const dispatch = useDispatch();
   const badges = useSelector((state) => state.badgeNew);
+
   if (badges && badges.has(listNameWithUpper)) {
     dispatch({
       type: "HIDE_BADGE_NEW",
@@ -25,9 +26,15 @@ export default function GamesList() {
     });
   }
 
+  if (badges && badges.has(ListLabel.ALL)) {
+    dispatch({
+      type: "HIDE_BADGE_NEW",
+      listName: ListLabel.ALL,
+    });
+  }
+
   return (
     <div>
-      <h1>{listNameWithUpper ? listNameWithUpper : ListLabel.ALL} Games</h1>
       <ul>
         {games.map((game) => (
           <li key={game.id}>

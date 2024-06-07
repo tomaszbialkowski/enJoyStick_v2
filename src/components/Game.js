@@ -160,7 +160,7 @@ export default function Game({ id }) {
     setImageSrc(placeholder);
   }
 
-  function deleteGame() {
+  function handleDeleteGame() {
     dispatch({
       type: "DELETE_GAME",
       payload: id,
@@ -179,7 +179,7 @@ export default function Game({ id }) {
         <Button text="Played" onClick={handlePlayedList} />
         <Button text="Finished" onClick={handleFinishedList} />
       </div>
-      <Link to={`/game/${title}`}>
+      <Link to={`/game/${id}`}>
         <img
           src={imageSrc}
           alt={`cover of ${title}`}
@@ -191,12 +191,9 @@ export default function Game({ id }) {
           <Button text={`Downs: ${downVotes}`} onClick={handleDownVotes} />
           <span>{result}</span>
           <Button text={`Likes: ${upVotes}`} onClick={handleUpVotes} />
-          <Button text="Delete" onClick={deleteGame} />
+          <Button text="Delete" onClick={handleDeleteGame} />
         </div>
       </div>
     </div>
   );
-}
-export function showInfo(dispatch, show, text, type) {
-  dispatch({ type: "SHOW_MODAL", payload: { show, text, type } });
 }

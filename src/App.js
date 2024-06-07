@@ -1,6 +1,7 @@
 import "./App.css";
 import RouterConfig from "./router/RouterConfig";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
 import Logo from "./components/Logo";
@@ -11,6 +12,7 @@ import Info from "./components/Info";
 
 export default function App() {
   const modalInfo = useSelector((state) => state.info);
+  const location = useLocation();
 
   return (
     <div className="App">
@@ -19,7 +21,7 @@ export default function App() {
         <SearchBar />
       </Header>
       <div className="container__main">
-        <Lists />
+        <Lists path={location.pathname} />
         <main className="container__main--gameslist">
           {modalInfo.show && <Info text={modalInfo.text} />}
           <RouterConfig />

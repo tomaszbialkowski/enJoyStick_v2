@@ -1,6 +1,5 @@
 import { REACT_APP_OMDB_API_KEY } from "../constants/OAK";
 import Button from "../components/Button";
-import { showInfo } from "../components/Game";
 import useSelection from "../hooks/useSelection";
 
 import React, { useEffect, useState } from "react";
@@ -41,8 +40,19 @@ const SearchResults = () => {
   function handleClick(game) {
     if (!allGames.some((g) => g.id === game.id)) {
       dispatch({ type: "ADD_TO_GAMES", payload: game });
-      showInfo(dispatch, true, `Add ${game.title} to Your list`, "Add");
+      showInfo(true, `Add ${game.title} to Your list`, "Add");
+      showBadgeNew();
     }
+  }
+  function showInfo(show, text, type) {
+    dispatch({ type: "SHOW_MODAL", payload: { show, text, type } });
+  }
+
+  function showBadgeNew() {
+    dispatch({
+      type: "SHOW_BADGE_NEW",
+      listName: "All",
+    });
   }
 
   return (

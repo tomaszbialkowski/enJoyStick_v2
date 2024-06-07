@@ -1,3 +1,3 @@
 export default function Badge({ text }) {
-  return <span>{text}</span>;
+  return <span className="badge">{text}</span>;
 }
