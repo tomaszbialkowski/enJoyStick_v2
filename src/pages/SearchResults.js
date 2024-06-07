@@ -83,11 +83,13 @@ export default function SearchResults() {
                     position: "absolute",
                     top: "22px",
                     width: "200px",
-                    backgroundColor: "rgba(255,255,255,0.8)",
+                    backgroundColor: "rgba(255,255,255,0.6)",
+                    backdropFilter: "blur(2px)",
                     height: "100%",
                     fontWeight: "800",
                     padding: "8px",
                     margin: "auto",
+                    color: "#000",
                   }}
                 >
                   <p>You alredy saved this game to your collection</p>
@@ -95,7 +97,7 @@ export default function SearchResults() {
               ) : (
                 <Button
                   text={"Add Game to Your Collection"}
-                  style={{ position: "absolute", top: "45%" }}
+                  style={{ position: "absolute", top: "45%", left: "16px" }}
                   onClick={() =>
                     handleClick({ ...game, upVotes: 0, downVotes: 0 })
                   }

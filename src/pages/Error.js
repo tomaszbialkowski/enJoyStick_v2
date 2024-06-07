@@ -4,7 +4,7 @@ export default function Error() {
   return (
     <div>
       <p>Error</p>
-      <NavLink to="/egg">Link</NavLink>
+      <p>Jak tu trafiłeś?</p>
     </div>
   );
 }

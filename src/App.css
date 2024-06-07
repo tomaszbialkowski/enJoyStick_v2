@@ -32,10 +32,15 @@ body {
 
 .container__footer {
   width: 100%;
-  background-color: #ffffff79;
-  text-align: center;
+  padding-top: 8px;
   position: fixed;
   bottom: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: black;
+  font-size: 0.9rem;
 }
 
 .container__main--catalogues {
@@ -49,8 +54,13 @@ body {
   scroll-behavior: smooth;
   width: 50%;
 }
+
+.container__main--gameslist li img {
+  padding-left: 8px;
+}
+
 .container__main--gameslist li:last-of-type {
-  margin-bottom: 100px;
+  margin-bottom: 120px;
 }
 
 img {
