@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import GamesList from "../components/GamesList";
 // import GameDetails from "../components/GameDetails";
-import Search from "../pages/Search";
+import SearchResults from "../pages/SearchResults";
 // import Egg from "../pages/Egg";
 import Error from "../pages/Error";
 
@@ -11,7 +11,7 @@ export default function RouterConfig() {
     <Routes>
       <Route path="/" element={<GamesList />} />
       <Route path="/:listName" element={<GamesList />} />
-      <Route path="/search" element={<Search />} />
+      <Route path="/search" element={<SearchResults />} />
       {/*<Route path="/game/:title" element={<GameDetails />} />
       <Route path="/egg" element={<Egg />} />*/}
       <Route path="*" element={<Error />} />

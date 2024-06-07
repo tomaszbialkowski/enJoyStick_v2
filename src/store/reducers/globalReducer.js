@@ -337,10 +337,15 @@ export const gameReducer = (state = initState, action) => {
     case "HIDE_MODAL": {
       return { ...state, info: { ...state.info, show: false } };
     }
-    case "ADD_TO_RESULTS":
+    case "ADD_TO_GAMES":
       return {
         ...state,
-        searchResults: action.payload,
+        games: [...state.games, action.payload],
+      };
+    case "DELETE_GAME":
+      return {
+        ...state,
+        games: state.games.filter((game) => game.id !== action.payload),
       };
     default:
       return state;

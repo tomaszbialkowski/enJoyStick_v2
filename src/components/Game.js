@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useState } from "react";
 
 import useSelection from "../hooks/useSelection";
 import Button from "./Button";
@@ -17,6 +18,10 @@ export default function Game({ id }) {
   const isLame = game.isLame;
 
   const dispatch = useDispatch();
+
+  const gameImage = cover.startsWith("https") ? cover : `/img/covers/${cover}`;
+  const [imageSrc, setImageSrc] = useState(gameImage);
+  const placeholder = "/img/image-placeholder.jpg";
 
   useEffect(() => {
     if (result >= 5 && !isHot) {
@@ -150,25 +155,48 @@ export default function Game({ id }) {
     dispatch({ type: "SHOW_MODAL", payload: { show, text, type } });
   }
 
+  function handleImageError() {
+    console.log("blad ladowania obrazka");
+    setImageSrc(placeholder);
+  }
+
+  function deleteGame() {
+    dispatch({
+      type: "DELETE_GAME",
+      payload: id,
+    });
+    showInfo(true, `Delete ${game.title} from Your list`, "Remove");
+  }
+
   return (
     <div>
       <h3 style={{ marginBottom: "4px", marginTop: "32px" }}>{title}</h3>
-      <Button
-        text={!isFavourite ? "Add to FAV" : "Remove from FAV"}
-        onClick={handleFavouritesList}
-      />
-      <Button text="Played" onClick={handlePlayedList} />
-      <Button text="Finished" onClick={handleFinishedList} />
+      <div>
+        <Button
+          text={!isFavourite ? "Add to FAV" : "Remove from FAV"}
+          onClick={handleFavouritesList}
+        />
+        <Button text="Played" onClick={handlePlayedList} />
+        <Button text="Finished" onClick={handleFinishedList} />
+      </div>
       <Link to={`/game/${title}`}>
-        <img src={`/img/covers/${cover}`} alt={`cover of ${title}`} />
+        <img
+          src={imageSrc}
+          alt={`cover of ${title}`}
+          onError={handleImageError}
+        />
       </Link>
       <div>
         <div>
           <Button text={`Downs: ${downVotes}`} onClick={handleDownVotes} />
           <span>{result}</span>
           <Button text={`Likes: ${upVotes}`} onClick={handleUpVotes} />
+          <Button text="Delete" onClick={deleteGame} />
         </div>
       </div>
     </div>
   );
+}
+export function showInfo(dispatch, show, text, type) {
+  dispatch({ type: "SHOW_MODAL", payload: { show, text, type } });
 }

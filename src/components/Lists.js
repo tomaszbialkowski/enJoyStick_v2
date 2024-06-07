@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import useSelection from "../hooks/useSelection";
 import { ListLabel } from "../constants/listLabels";
-import { useSelector } from "react-redux";
+import { Badge } from "../components/Badge";
 
 export default function Lists() {
   const { lists, allGames } = useSelection();

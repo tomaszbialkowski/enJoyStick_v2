@@ -27,7 +27,7 @@ export default function GamesList() {
 
   return (
     <div>
-      <h3>{listNameWithUpper ? listNameWithUpper : ListLabel.ALL}</h3>
+      <h1>{listNameWithUpper ? listNameWithUpper : ListLabel.ALL} Games</h1>
       <ul>
         {games.map((game) => (
           <li key={game.id}>
