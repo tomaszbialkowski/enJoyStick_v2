@@ -1,11 +1,12 @@
 .App {
   text-align: center;
-  color: #3a4d5c;
+  color: rgb(75, 85, 99);
 }
 
 body {
   overflow: hidden;
-  font-family: sans-serif;
+  font-family: Inter, sans-serif;
+  color: rgb(75, 85, 99);
 }
 
 .container__header,
@@ -28,23 +29,29 @@ body {
 .container__main {
   align-items: flex-start;
   margin-top: 50px;
+  color: rgb(75, 85, 99);
 }
 
 .container__footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 16px;
+  position: fixed;
   width: 100%;
   padding-top: 8px;
-  position: fixed;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(4px);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  text-align: center;
-  color: black;
+  color: rgb(75, 85, 99);
   font-size: 0.9rem;
 }
 
 .container__main--catalogues {
   width: 25%;
+  color: rgb(75, 85, 99);
 }
 
 .container__main--gameslist {
@@ -77,37 +84,49 @@ a {
   text-decoration: none;
   list-style-type: none;
   text-align: left;
+  color: rgb(52, 59, 68);
 }
 
-.container__main--gameslist img {
+img.thumb {
   width: 200px;
+}
+
+img.large {
+  width: 400px;
 }
 
 .modal {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 35%;
+  left: 0;
   width: 20rem;
   z-index: 111;
-  background-color: red;
-  border-left: 4px solid red;
-  border-radius: 8px;
+  background-color: rgb(243, 243, 243);
+  border: 1px solid rgb(175, 175, 175);
+  border-right: 8px solid red;
+  border-radius: 0 8px 8px 0;
+  color: red;
   margin: 0 auto;
-  color: #fff;
 }
 
 .modal.add {
-  border-left: 4px solid green;
-  background-color: green;
+  background-color: rgb(243, 243, 243);
+  border: 1px solid rgb(175, 175, 175);
+  border-right: 8px solid green;
+  border-radius: 0 8px 8px 0;
+  color: green;
 }
 
 .badge {
-  background-color: #dbdbdb;
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 2px 6px;
-  border-radius: 50px;
+  font-family: Inter, sans-serif;
+  display: inline-block;
+  background-color: #e5e7eb;
+  color: rgb(75, 85, 99);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
   margin-left: 8px;
+  border-radius: 50px;
 }
 
 button.back {
@@ -116,7 +135,7 @@ button.back {
 
 li .active {
   font-weight: 700;
-  border-bottom: 2px solid navy;
+  border-bottom: 2px solid rgb(75, 85, 99);
   padding-bottom: 4px;
 }
 

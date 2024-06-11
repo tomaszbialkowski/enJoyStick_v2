@@ -1,51 +1,50 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { REACT_APP_OMDB_API_KEY } from "../constants/OAK";
 import { useEffect, useState } from "react";
 
 import Button from "./Button";
+import { Loader } from "./Loader";
+import CoverImage from "./CoverImage";
+import { coverSize } from "../constants/coverSize";
+import { API_URL_WITH_KEY } from "../constants/apiUrl";
 
 export default function GameDetails() {
-  const [details, setDetails] = useState({});
-  const { id } = useParams();
-  const KEY = REACT_APP_OMDB_API_KEY;
   const navigate = useNavigate();
-  const [imageSrc, setImageSrc] = useState("");
-  const placeholder = "/img/image-placeholder.jpg";
+  const { id } = useParams();
+  const [details, setDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchGame() {
-      const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${KEY}&i=${id}`
-      );
-      const data = await response.json();
+      try {
+        const response = await fetch(`${API_URL_WITH_KEY}&i=${id}`);
+        const data = await response.json();
 
-      const gameImage = data.Poster.startsWith("https")
-        ? data.Poster
-        : `/img/covers/${data.Title}.jpg`;
+        const gameImage = data.Poster.startsWith("https")
+          ? data.Poster
+          : `/img/covers/${data.Title}.jpg`;
 
-      setImageSrc(gameImage);
-
-      const game = {
-        title: data.Title,
-        genre: data.Genre,
-        plot: data.Plot,
-        poster: gameImage,
-        released: data.Released,
-        writer: data.Writer,
-        rating: data.imdbRating,
-        actors: data.Actors,
-        awards: data.Awards,
-        director: data.Director,
-        country: data.Country,
-      };
-      setDetails(game);
+        const game = {
+          title: data.Title,
+          genre: data.Genre,
+          plot: data.Plot,
+          poster: gameImage,
+          released: data.Released,
+          writer: data.Writer,
+          rating: data.imdbRating,
+          actors: data.Actors,
+          awards: data.Awards,
+          director: data.Director,
+          country: data.Country,
+        };
+        setDetails(game);
+      } catch (error) {
+        console.error("Error", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchGame();
   }, []);
-
-  function handleImageError() {
-    setImageSrc(placeholder);
-  }
 
   const renderDetail = (label, value) => {
     if (value === "N/A") return null;
@@ -57,17 +56,18 @@ export default function GameDetails() {
     );
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div>
       <Button text="< Back" className="back" onClick={() => navigate(-1)} />
       <h1>{details.title}</h1>
-      <img
-        src={imageSrc}
-        alt={`Poster of ${details.title} game`}
-        onError={handleImageError}
-        style={{ width: "400px" }}
+      <CoverImage
+        src={details.poster}
+        title={details.title}
+        size={coverSize.LARGE}
       />
-      {renderDetail("Script", details.plot)}
+      {renderDetail("Plot", details.plot)}
       {renderDetail("Genre", details.genre)}
       {renderDetail("Date", details.released)}
       {renderDetail("Production", details.country)}

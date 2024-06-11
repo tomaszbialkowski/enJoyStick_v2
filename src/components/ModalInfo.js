@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import useSelection from "../hooks/useSelection";
+import { useDispatch, useSelector } from "react-redux";
+import { getModalType } from "../store/selectors/selectors";
 
 export default function Info({ text }) {
   const dispatch = useDispatch();
-  const { modalType } = useSelection();
+  const modalType = useSelector(getModalType);
 
   useEffect(() => {
     const modalTimer = setTimeout(() => {

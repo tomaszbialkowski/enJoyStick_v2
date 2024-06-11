@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import useSelection from "../hooks/useSelection";
 import { ListLabel } from "../constants/listLabels";
 import Badge from "../components/Badge";
+import { getLists, getAllGames } from "../store/selectors/selectors";
 
 export default function Lists({ path }) {
-  const { lists, allGames } = useSelection();
+  const lists = useSelector(getLists);
+  const allGames = useSelector(getAllGames);
   const badges = useSelector((state) => state.badgeNew);
   const pathName = path.slice(1);
 
@@ -26,7 +27,7 @@ export default function Lists({ path }) {
               >
                 {list.toUpperCase()}
                 <Badge text={gameCount} />
-                {badges.has(list) ? <Badge text="NEW" /> : null}
+                {badges.has(list) ? <Badge /> : null}
               </NavLink>
             </li>
           );

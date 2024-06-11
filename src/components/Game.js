@@ -1,27 +1,26 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useState } from "react";
 
-import useSelection from "../hooks/useSelection";
+import useModalActions from "../hooks/useModalActions";
 import Button from "./Button";
 import { ListLabel } from "../constants/listLabels";
+import { getGameById } from "../store/selectors/selectors";
+import CoverImage from "./CoverImage";
+import { coverSize } from "../constants/coverSize";
 
 export default function Game({ id }) {
-  const { gameById: game } = useSelection(id);
+  const game = useSelector((state) => getGameById(state, id));
   const { title, upVotes, downVotes, cover } = game;
+  const dispatch = useDispatch();
+
+  const { showModalInfo } = useModalActions();
   const result = upVotes - downVotes;
   const isFavourite = game.isFavourite;
   const isPlayed = game.isPlayed;
   const isFinished = game.isFinished;
   const isHot = game.isHot;
   const isLame = game.isLame;
-
-  const dispatch = useDispatch();
-
-  const gameImage = cover.startsWith("https") ? cover : `/img/covers/${cover}`;
-  const [imageSrc, setImageSrc] = useState(gameImage);
-  const placeholder = "/img/image-placeholder.jpg";
 
   useEffect(() => {
     if (result >= 5 && !isHot) {
@@ -41,7 +40,7 @@ export default function Game({ id }) {
     if (result === 0 && !isLame) {
       addToLameList();
       showBadgeNew(ListLabel.LAME);
-      showInfo(true, `Add to ${ListLabel.LAME} list`, "Add");
+      showModalInfo(true, `Add to ${ListLabel.LAME} list`, "Add");
     }
     if (result === 5 && isHot) {
       removeFromHotList();
@@ -57,7 +56,7 @@ export default function Game({ id }) {
     if (result === 4 && !isHot) {
       addToHotList();
       showBadgeNew(ListLabel.HOT);
-      showInfo(true, `Add to ${ListLabel.HOT} list`, "Add");
+      showModalInfo(true, `Add to ${ListLabel.HOT} list`, "Add");
     }
     if (result === -1 && isLame) {
       removeFromLameList();
@@ -84,7 +83,7 @@ export default function Game({ id }) {
       type: "REMOVE_FROM_HOT",
       payload: id,
     });
-    showInfo(true, `Remove from ${ListLabel.HOT} list`, "Remove");
+    showModalInfo(true, `Remove from ${ListLabel.HOT} list`, "Remove");
   }
 
   function removeFromLameList() {
@@ -92,7 +91,8 @@ export default function Game({ id }) {
       type: "REMOVE_FROM_LAME",
       payload: id,
     });
-    showInfo(true, `Remove from ${ListLabel.LAME} list`, "Remove");
+    showModalInfo(true, `Remove to ${ListLabel.LAME} list`, "Remove");
+    if (isLame) hideBadgeNew(ListLabel.LAME);
   }
 
   function handleFavouritesList() {
@@ -102,13 +102,14 @@ export default function Game({ id }) {
         payload: id,
       });
       showBadgeNew(ListLabel.FAVOURITE);
-      showInfo(true, `Add from ${ListLabel.FAVOURITE} list`, "Add");
+      showModalInfo(true, `Add to  ${ListLabel.FAVOURITE} list`, "Add");
     } else {
       dispatch({
         type: "REMOVE_FROM_FAVOURITE",
         payload: id,
       });
-      showInfo(true, `Remove from ${ListLabel.FAVOURITE} list`, "Remove");
+      showModalInfo(true, `Remove from ${ListLabel.FAVOURITE} list`, "Remove");
+      if (isFavourite) hideBadgeNew(ListLabel.FAVOURITE);
     }
   }
 
@@ -119,13 +120,14 @@ export default function Game({ id }) {
         payload: id,
       });
       showBadgeNew(ListLabel.PLAYED);
-      showInfo(true, `Add from ${ListLabel.PLAYED} list`, "Add");
+      showModalInfo(true, `Add to ${ListLabel.PLAYED} list`, "Add");
     } else {
       dispatch({
         type: "REMOVE_FROM_PLAYED",
         payload: id,
       });
-      showInfo(true, `Remove from ${ListLabel.PLAYED} list`, "Remove");
+      showModalInfo(true, `Remove from ${ListLabel.PLAYED} list`, "Remove");
+      if (isPlayed) hideBadgeNew(ListLabel.PLAYED);
     }
   }
 
@@ -136,13 +138,14 @@ export default function Game({ id }) {
         payload: id,
       });
       showBadgeNew(ListLabel.FINISHED);
-      showInfo(true, `Add from ${ListLabel.FINISHED} list`, "Add");
+      showModalInfo(true, `Add to ${ListLabel.FINISHED} list`, "Add");
     } else {
       dispatch({
         type: "REMOVE_FROM_FINISHED",
         payload: id,
       });
-      showInfo(true, `Remove from ${ListLabel.FINISHED} list`, "Remove");
+      showModalInfo(true, `Remove from ${ListLabel.FINISHED} list`, "Remove");
+      if (isFinished) hideBadgeNew(ListLabel.FINISHED);
     }
   }
 
@@ -160,21 +163,12 @@ export default function Game({ id }) {
     });
   }
 
-  function showInfo(show, text, type) {
-    dispatch({ type: "SHOW_MODAL", payload: { show, text, type } });
-  }
-
-  function handleImageError() {
-    console.log("blad ladowania obrazka");
-    setImageSrc(placeholder);
-  }
-
   function handleDeleteGame() {
     dispatch({
       type: "DELETE_GAME",
       payload: id,
     });
-    showInfo(true, `Delete ${game.title} from Your list`, "Remove");
+    showModalInfo(true, `Delete ${game.title} from Your list`, "Remove");
   }
 
   return (
@@ -189,11 +183,7 @@ export default function Game({ id }) {
         <Button text="Finished" onClick={handleFinishedList} />
       </div>
       <Link to={`/game/${id}`}>
-        <img
-          src={imageSrc}
-          alt={`cover of ${title}`}
-          onError={handleImageError}
-        />
+        <CoverImage src={cover} title={title} size={coverSize.THUMB} />
       </Link>
       <div>
         <div>
