@@ -17,7 +17,7 @@
 
 ## O Projekcie
 
-Ejoystick to Twoja kolekcja gier, które są dla Ciebie ważne.
+Enjoystick to Twoja kolekcja gier, które są dla Ciebie ważne.
 
 ### Co możesz:
 
