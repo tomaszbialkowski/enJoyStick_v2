@@ -9,7 +9,6 @@ export default function Lists({ path }) {
   const lists = useSelector(getLists);
   const allGames = useSelector(getAllGames);
   const badges = useSelector((state) => state.badgeNew);
-  const pathName = path.slice(1);
 
   return (
     <aside className="container__main--catalogues">
@@ -21,7 +20,7 @@ export default function Lists({ path }) {
               : allGames.filter((game) => game[`is${list}`]).length;
 
           return (
-            <li key={list} className={list === pathName ? "active" : ""}>
+            <li key={list} className="list">
               <NavLink
                 to={list === ListLabel.ALL ? "/" : `/${list.toLowerCase()}`}
               >

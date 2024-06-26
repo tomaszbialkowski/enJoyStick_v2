@@ -87,47 +87,30 @@ export default function SearchResults() {
                   key={game.id}
                   onMouseEnter={() => setSelectedId(game.id)}
                   onMouseLeave={() => setSelectedId(null)}
-                  style={{ position: "relative" }}
+                  className="gameItem"
                 >
-                  <h3 style={{ marginBottom: "4px", marginTop: "32px" }}>
-                    {game.title}
-                  </h3>
-                  <CoverImage
-                    src={game.cover}
-                    title={game.title}
-                    size={coverSize.THUMB}
-                  />
-                  {selectedId === game.id &&
-                    (allGames.some((game) => game.id === selectedId) ? (
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: "22px",
-                          width: "200px",
-                          backgroundColor: "rgba(255,255,255,0.6)",
-                          backdropFilter: "blur(2px)",
-                          height: "100%",
-                          fontWeight: "800",
-                          padding: "8px",
-                          margin: "auto",
-                          color: "#000",
-                        }}
-                      >
-                        <p>You alredy saved this game to your collection</p>
-                      </div>
-                    ) : (
-                      <Button
-                        text={"Add Game to Your Collection"}
-                        style={{
-                          position: "absolute",
-                          top: "45%",
-                          left: "16px",
-                        }}
-                        onClick={() =>
-                          handleClick({ ...game, upVotes: 0, downVotes: 0 })
-                        }
-                      />
-                    ))}
+                  <h3 className="game_header">{game.title}</h3>
+                  <div className="imageWrapper">
+                    <CoverImage
+                      src={game.cover}
+                      title={game.title}
+                      size={coverSize.THUMB}
+                    />
+                    {selectedId === game.id &&
+                      (allGames.some((game) => game.id === selectedId) ? (
+                        <div className="game_cover--info">
+                          <p>You alredy saved this game to your collection</p>
+                        </div>
+                      ) : (
+                        <Button
+                          text={"Add Game to Your Collection"}
+                          className="btn--addToCollection"
+                          onClick={() =>
+                            handleClick({ ...game, upVotes: 0, downVotes: 0 })
+                          }
+                        />
+                      ))}
+                  </div>
                 </li>
               ))}
             </ul>

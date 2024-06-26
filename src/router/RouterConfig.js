@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import GamesList from "../components/GamesList";
 import GameDetails from "../components/GameDetails";

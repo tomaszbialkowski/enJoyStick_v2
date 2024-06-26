@@ -16,11 +16,7 @@ export default function Game({ id }) {
 
   const { showModalInfo } = useModalActions();
   const result = upVotes - downVotes;
-  const isFavourite = game.isFavourite;
-  const isPlayed = game.isPlayed;
-  const isFinished = game.isFinished;
-  const isHot = game.isHot;
-  const isLame = game.isLame;
+  const { isFavourite, isPlayed, isFinished, isHot, isLame } = game;
 
   useEffect(() => {
     if (result >= 5 && !isHot) {
@@ -95,57 +91,22 @@ export default function Game({ id }) {
     if (isLame) hideBadgeNew(ListLabel.LAME);
   }
 
-  function handleFavouritesList() {
-    if (!isFavourite) {
+  function handleListAction(isOnlist, addType, removeType, listName) {
+    console.log(isOnlist);
+    if (!isOnlist) {
       dispatch({
-        type: "ADD_TO_FAVOURITE",
+        type: addType,
         payload: id,
       });
-      showBadgeNew(ListLabel.FAVOURITE);
-      showModalInfo(true, `Add to  ${ListLabel.FAVOURITE} list`, "Add");
+      showBadgeNew(listName);
+      showModalInfo(true, `Add to ${listName} list`, "Add");
     } else {
       dispatch({
-        type: "REMOVE_FROM_FAVOURITE",
+        type: removeType,
         payload: id,
       });
-      showModalInfo(true, `Remove from ${ListLabel.FAVOURITE} list`, "Remove");
-      if (isFavourite) hideBadgeNew(ListLabel.FAVOURITE);
-    }
-  }
-
-  function handlePlayedList() {
-    if (!isPlayed) {
-      dispatch({
-        type: "ADD_TO_PLAYED",
-        payload: id,
-      });
-      showBadgeNew(ListLabel.PLAYED);
-      showModalInfo(true, `Add to ${ListLabel.PLAYED} list`, "Add");
-    } else {
-      dispatch({
-        type: "REMOVE_FROM_PLAYED",
-        payload: id,
-      });
-      showModalInfo(true, `Remove from ${ListLabel.PLAYED} list`, "Remove");
-      if (isPlayed) hideBadgeNew(ListLabel.PLAYED);
-    }
-  }
-
-  function handleFinishedList() {
-    if (!isFinished) {
-      dispatch({
-        type: "ADD_TO_FINISHED",
-        payload: id,
-      });
-      showBadgeNew(ListLabel.FINISHED);
-      showModalInfo(true, `Add to ${ListLabel.FINISHED} list`, "Add");
-    } else {
-      dispatch({
-        type: "REMOVE_FROM_FINISHED",
-        payload: id,
-      });
-      showModalInfo(true, `Remove from ${ListLabel.FINISHED} list`, "Remove");
-      if (isFinished) hideBadgeNew(ListLabel.FINISHED);
+      showModalInfo(true, `Remove from ${listName} list`, "Remove");
+      if (isOnlist) hideBadgeNew(listName);
     }
   }
 
@@ -173,14 +134,41 @@ export default function Game({ id }) {
 
   return (
     <div>
-      <h3 style={{ marginBottom: "4px", marginTop: "32px" }}>{title}</h3>
+      <h3 className="game_header">{title}</h3>
       <div>
         <Button
           text={!isFavourite ? "Add to FAV" : "Remove from FAV"}
-          onClick={handleFavouritesList}
+          onClick={() =>
+            handleListAction(
+              isFavourite,
+              "ADD_TO_FAVOURITE",
+              "REMOVE_FROM_FAVOURITE",
+              ListLabel.FAVOURITE
+            )
+          }
         />
-        <Button text="Played" onClick={handlePlayedList} />
-        <Button text="Finished" onClick={handleFinishedList} />
+        <Button
+          text="Played"
+          onClick={() =>
+            handleListAction(
+              isPlayed,
+              "ADD_TO_PLAYED",
+              "REMOVE_FROM_PLAYED",
+              ListLabel.PLAYED
+            )
+          }
+        />
+        <Button
+          text="Finished"
+          onClick={() =>
+            handleListAction(
+              isFinished,
+              "ADD_TO_FINISHED",
+              "REMOVE_FROM_FINISHED",
+              ListLabel.FINISHED
+            )
+          }
+        />
       </div>
       <Link to={`/game/${id}`}>
         <CoverImage src={cover} title={title} size={coverSize.THUMB} />

@@ -62,9 +62,9 @@ body {
   width: 50%;
 }
 
-.container__main--gameslist li img {
+/* .container__main--gameslist li img {
   padding-left: 8px;
-}
+} */
 
 .container__main--gameslist li:last-of-type {
   margin-bottom: 120px;
@@ -133,12 +133,45 @@ button.back {
   margin-top: 25px;
 }
 
-li .active {
+li.list .active {
   font-weight: 700;
   border-bottom: 2px solid rgb(75, 85, 99);
   padding-bottom: 4px;
 }
 
-li {
+li.list {
   margin-bottom: 24px;
+}
+
+.game_header {
+  margin-bottom: 4px;
+  margin-top: 32px;
+}
+
+.imageWrapper {
+  position: relative;
+  margin-left: 8px;
+}
+
+.game_cover--info {
+  position: absolute;
+  top: 0px;
+  width: 200px;
+  background-color: rgba(234, 226, 183, 0.6);
+  backdrop-filter: blur(4px);
+  height: 100%;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+}
+
+.game_cover--info p {
+  margin-top: 40%;
+  padding: 8px;
+}
+
+.btn--addToCollection {
+  position: absolute;
+  top: 45%;
+  left: 8px;
 }
