@@ -92,7 +92,6 @@ export default function Game({ id }) {
   }
 
   function handleListAction(isOnlist, addType, removeType, listName) {
-    console.log(isOnlist);
     if (!isOnlist) {
       dispatch({
         type: addType,

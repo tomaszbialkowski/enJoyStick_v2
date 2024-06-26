@@ -62,10 +62,6 @@ body {
   width: 50%;
 }
 
-/* .container__main--gameslist li img {
-  padding-left: 8px;
-} */
-
 .container__main--gameslist li:last-of-type {
   margin-bottom: 120px;
 }
