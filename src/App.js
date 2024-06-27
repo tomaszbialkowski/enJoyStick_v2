@@ -9,6 +9,7 @@ import SearchBar from "./components/SearchBar";
 import Lists from "./components/Lists";
 import Footer from "./components/Footer";
 import ModalInfo from "./components/ModalInfo";
+import Button from "./components/Button";
 
 export default function App() {
   const modalInfo = useSelector((state) => state.info);
@@ -19,6 +20,8 @@ export default function App() {
       <Header>
         <Logo />
         <SearchBar />
+        <Button text="I" className="btn_icon--search" />
+        <Button text="A" className="btn_icon--search" />
       </Header>
       <div className="container__main">
         <Lists path={location.pathname} />

@@ -11,7 +11,7 @@ export default function Lists({ path }) {
   const badges = useSelector((state) => state.badgeNew);
 
   return (
-    <aside className="container__main--catalogues">
+    <aside className="container__main--lists">
       <ul>
         {lists.map((list) => {
           const gameCount =
@@ -23,10 +23,11 @@ export default function Lists({ path }) {
             <li key={list} className="list">
               <NavLink
                 to={list === ListLabel.ALL ? "/" : `/${list.toLowerCase()}`}
+                className="list-information"
               >
                 {list.toUpperCase()}
                 <Badge text={gameCount} />
-                {badges.has(list) ? <Badge /> : null}
+                {badges.has(list) ? <Badge variant="new" /> : null}
               </NavLink>
             </li>
           );

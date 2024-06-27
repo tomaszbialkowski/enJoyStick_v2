@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Button from "./Button";
 
 const SearchBar = () => {
@@ -15,13 +16,20 @@ const SearchBar = () => {
 
   return (
     <form onSubmit={handleSearch}>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search new games to your collection..."
-      />
-      <Button text="🔍" />
+      <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+      <div className="searchWraper">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search new games to your collection..."
+          className="search-input"
+        />
+        <Button
+          text={<FontAwesomeIcon icon={faMagnifyingGlass} />}
+          className="btn_icon--search"
+        />
+      </div>
     </form>
   );
 };

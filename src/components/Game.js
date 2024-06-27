@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import useModalActions from "../hooks/useModalActions";
 import Button from "./Button";
@@ -8,6 +9,12 @@ import { ListLabel } from "../constants/listLabels";
 import { getGameById } from "../store/selectors/selectors";
 import CoverImage from "./CoverImage";
 import { coverSize } from "../constants/coverSize";
+import {
+  faCircleXmark,
+  faGamepad,
+  faHeart,
+  faTrophy,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Game({ id }) {
   const game = useSelector((state) => getGameById(state, id));
@@ -132,11 +139,17 @@ export default function Game({ id }) {
   }
 
   return (
-    <div>
+    <div className="container_main--game">
+      <Button
+        className="btn_icon--delete"
+        text={<FontAwesomeIcon icon={faCircleXmark} />}
+        onClick={handleDeleteGame}
+      />
       <h3 className="game_header">{title}</h3>
-      <div>
+      <div className="buttonWrapper">
         <Button
-          text={!isFavourite ? "Add to FAV" : "Remove from FAV"}
+          className={`btn_icon--listHandlers ${!isFavourite ? "" : "fav"}`}
+          text={<FontAwesomeIcon icon={faHeart} />}
           onClick={() =>
             handleListAction(
               isFavourite,
@@ -147,7 +160,8 @@ export default function Game({ id }) {
           }
         />
         <Button
-          text="Played"
+          className={`btn_icon--listHandlers ${!isPlayed ? "" : "played"}`}
+          text={<FontAwesomeIcon icon={faGamepad} />}
           onClick={() =>
             handleListAction(
               isPlayed,
@@ -158,7 +172,8 @@ export default function Game({ id }) {
           }
         />
         <Button
-          text="Finished"
+          className={`btn_icon--listHandlers ${!isFinished ? "" : "finished"}`}
+          text={<FontAwesomeIcon icon={faTrophy} />}
           onClick={() =>
             handleListAction(
               isFinished,
@@ -172,13 +187,10 @@ export default function Game({ id }) {
       <Link to={`/game/${id}`}>
         <CoverImage src={cover} title={title} size={coverSize.THUMB} />
       </Link>
-      <div>
-        <div>
-          <Button text={`Downs: ${downVotes}`} onClick={handleDownVotes} />
-          <span>{result}</span>
-          <Button text={`Likes: ${upVotes}`} onClick={handleUpVotes} />
-          <Button text="❌" onClick={handleDeleteGame} />
-        </div>
+      <div className="buttonWrapper">
+        <Button text={`Downs: ${downVotes}`} onClick={handleDownVotes} />
+        <div className="game_score">{result}</div>
+        <Button text={`Likes: ${upVotes}`} onClick={handleUpVotes} />
       </div>
     </div>
   );

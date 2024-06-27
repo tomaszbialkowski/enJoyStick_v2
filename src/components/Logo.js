@@ -5,7 +5,7 @@ export default function Logo() {
     <NavLink to="/">
       <img
         className="logo"
-        src="/img/logo/enjoystick_logo_02.jpg"
+        src="/img/logo/enjoystick_logo_v3.jpg"
         alt="enjoystick logo"
       />
     </NavLink>

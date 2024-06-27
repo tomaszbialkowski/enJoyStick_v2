@@ -1,3 +1,3 @@
-export default function Badge({ text = "New" }) {
-  return <span className="badge">{text}</span>;
+export default function Badge({ text = "New", variant }) {
+  return <div className={`badge ${variant}`}>{text}</div>;
 }
