@@ -1,0 +1,147 @@
+.btn_icon--search,
+.btn_icon--info,
+.btn_icon--author {
+  width: var(--space_xl);
+  height: var(--space_xl);
+  border-radius: 50px;
+  border: none;
+  background-color: var(--gray-100);
+  color: var(--gray-300);
+  cursor: pointer;
+}
+
+.btn_icon--listHandlers {
+  width: var(--space_xl);
+  height: var(--space_xl);
+  border-radius: 50px;
+  border: 2px solid var(--gray-300);
+  background-color: #fff;
+  color: var(--gray-300);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_icon--listHandlers:hover,
+.btn_icon--delete:hover {
+  box-shadow: 0px 0px 24px 2px rgba(51, 46, 50, 0.1);
+  transform: scale(1.1);
+}
+
+.btn_icon--listHandlers:active,
+.btn_icon--delete:active {
+  transform: scale(1);
+  box-shadow: 0px 0px 8px 1px rgba(51, 46, 50, 0.1);
+}
+
+.btn_icon--delete {
+  width: var(--space_lg);
+  height: var(--space_lg);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-300);
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.btn_icon--listHandlers.fav {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.btn_icon--listHandlers.played {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+.btn_icon--listHandlers.finished {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.btn_icon--info,
+.btn_icon--author {
+  width: var(--space_xxl);
+  height: var(--space_xxl);
+  font-size: 1.1rem;
+  margin-left: var(--space_xs);
+}
+.btn_icon--info:hover,
+.btn_icon--author:hover {
+  color: var(--blue);
+  font-size: 1.3rem;
+}
+
+.btn_icon.votes:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 24px 4px rgba(51, 46, 50, 0.1);
+}
+
+.btn_icon.votes:active {
+  transform: scale(1);
+  box-shadow: 0px 0px 8px 1px rgba(51, 46, 50, 0.1);
+}
+
+.btn_icon.votes {
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 32px;
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.votes span {
+  color: var(--gray-700);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.votes.up {
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+.votes.down {
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+.buttonWrapper.votes {
+  justify-content: center;
+  margin-top: -36px;
+  gap: -0;
+  position: relative;
+  z-index: 10;
+}
+
+.game_score span {
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: normal;
+}
+
+.btn--addToCollection {
+  position: absolute;
+  top: 45%;
+  left: 8px;
+}
+
+.btn_icon--back {
+  margin-top: 25px;
+}

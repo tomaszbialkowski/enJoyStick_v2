@@ -13,6 +13,8 @@ import {
   faCircleXmark,
   faGamepad,
   faHeart,
+  faThumbsDown,
+  faThumbsUp,
   faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -43,7 +45,11 @@ export default function Game({ id }) {
     if (result === 0 && !isLame) {
       addToLameList();
       showBadgeNew(ListLabel.LAME);
-      showModalInfo(true, `Add to ${ListLabel.LAME} list`, "Add");
+      showModalInfo(
+        true,
+        `${game.title} was added to ${ListLabel.LAME} list`,
+        "Add"
+      );
     }
     if (result === 5 && isHot) {
       removeFromHotList();
@@ -59,7 +65,11 @@ export default function Game({ id }) {
     if (result === 4 && !isHot) {
       addToHotList();
       showBadgeNew(ListLabel.HOT);
-      showModalInfo(true, `Add to ${ListLabel.HOT} list`, "Add");
+      showModalInfo(
+        true,
+        `${game.title} was added to ${ListLabel.HOT} list`,
+        "Add"
+      );
     }
     if (result === -1 && isLame) {
       removeFromLameList();
@@ -86,7 +96,11 @@ export default function Game({ id }) {
       type: "REMOVE_FROM_HOT",
       payload: id,
     });
-    showModalInfo(true, `Remove from ${ListLabel.HOT} list`, "Remove");
+    showModalInfo(
+      true,
+      `${game.title} was removed from ${ListLabel.HOT} list`,
+      "Remove"
+    );
   }
 
   function removeFromLameList() {
@@ -94,7 +108,11 @@ export default function Game({ id }) {
       type: "REMOVE_FROM_LAME",
       payload: id,
     });
-    showModalInfo(true, `Remove to ${ListLabel.LAME} list`, "Remove");
+    showModalInfo(
+      true,
+      `${game.title} was removed to ${ListLabel.LAME} list`,
+      "Remove"
+    );
     if (isLame) hideBadgeNew(ListLabel.LAME);
   }
 
@@ -105,13 +123,17 @@ export default function Game({ id }) {
         payload: id,
       });
       showBadgeNew(listName);
-      showModalInfo(true, `Add to ${listName} list`, "Add");
+      showModalInfo(true, `${game.title} was added to ${listName} list`, "Add");
     } else {
       dispatch({
         type: removeType,
         payload: id,
       });
-      showModalInfo(true, `Remove from ${listName} list`, "Remove");
+      showModalInfo(
+        true,
+        `${game.title} was removed from ${listName} list`,
+        "Remove"
+      );
       if (isOnlist) hideBadgeNew(listName);
     }
   }
@@ -135,7 +157,7 @@ export default function Game({ id }) {
       type: "DELETE_GAME",
       payload: id,
     });
-    showModalInfo(true, `Delete ${game.title} from Your list`, "Remove");
+    showModalInfo(true, `${game.title} was deleted from Your list`, "Remove");
   }
 
   return (
@@ -187,11 +209,21 @@ export default function Game({ id }) {
       <Link to={`/game/${id}`}>
         <CoverImage src={cover} title={title} size={coverSize.THUMB} />
       </Link>
-      <div className="buttonWrapper">
-        <Button text={`Downs: ${downVotes}`} onClick={handleDownVotes} />
-        <div className="game_score">{result}</div>
-        <Button text={`Likes: ${upVotes}`} onClick={handleUpVotes} />
+      <div className="buttonWrapper votes">
+        <Button onClick={handleDownVotes} className="btn_icon votes down">
+          <FontAwesomeIcon icon={faThumbsDown} />
+          <span>{downVotes}</span>
+        </Button>
+        <div className="game_score">
+          {result}
+          <span>SCORE</span>
+        </div>
+        <Button onClick={handleUpVotes} className="btn_icon votes up">
+          <FontAwesomeIcon icon={faThumbsUp} />
+          <span>{upVotes}</span>
+        </Button>
       </div>
+      <div className="borders">ENJOYSTICK</div>
     </div>
   );
 }

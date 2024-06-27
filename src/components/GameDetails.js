@@ -60,7 +60,11 @@ export default function GameDetails() {
     <Loader />
   ) : (
     <div>
-      <Button text="< Back" className="back" onClick={() => navigate(-1)} />
+      <Button
+        text="< Back"
+        className="btn_icon--back"
+        onClick={() => navigate(-1)}
+      />
       <h1>{details.title}</h1>
       <CoverImage
         src={details.poster}
