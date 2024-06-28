@@ -31,6 +31,14 @@
   font-weight: 400;
 }
 
+.imageWrapper {
+  position: relative;
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .imageWrapper .game_poster--thumb {
   margin-top: var(--space_md);
 }

@@ -54,7 +54,7 @@ export default function GameDetails() {
     return (
       // <div style={{ display: "flex", alignItems: "baseline" }}>
       <div className="game_paragraph">
-        <Badge text={label} variant="info" />
+        <Badge text={label} variant="textLabel" />
         <div className="game_paragraph--text">{value}</div>
       </div>
     );

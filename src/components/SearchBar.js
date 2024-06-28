@@ -15,8 +15,7 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch}>
-      <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+    <form onSubmit={handleSearch} className="searchBar">
       <div className="searchWraper">
         <input
           type="text"

@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
 .btn_icon--listHandlers,
@@ -22,7 +22,8 @@
 .btn_icon--listHandlers:hover,
 .btn_icon--back:hover,
 .btn_icon--delete:hover,
-.btn_icon.votes:hover {
+.btn_icon.votes:hover,
+.btn_icon--add:hover {
   box-shadow: 0px 0px 12px 1px rgba(51, 46, 50, 0.1);
   transform: scale(1.1);
 }
@@ -30,7 +31,8 @@
 .btn_icon--listHandlers:active,
 .btn_icon--back:active,
 .btn_icon--delete:active,
-.btn_icon.votes:active {
+.btn_icon.votes:active,
+.btn_icon--add:hover {
   transform: scale(1);
   box-shadow: 0px 0px 8px 1px rgba(51, 46, 50, 0.1);
 }
@@ -111,14 +113,6 @@
 .game_score span {
   font-weight: 400;
   font-size: 0.7rem;
-}
-
-.imageWrapper {
-  position: relative;
-  margin-left: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .btn_icon--add {

@@ -22,7 +22,7 @@
   letter-spacing: 0.5px;
 }
 
-.badge.info {
+.badge.textLabel {
   padding: 6px 18px;
   border: 1px solid var(--gray-300);
   color: var(--gray-700);

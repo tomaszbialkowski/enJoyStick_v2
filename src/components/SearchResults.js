@@ -75,11 +75,12 @@ export default function SearchResults() {
         <Loader />
       ) : (
         <>
-          <h3>
-            Found
-            <Badge text={`${data.length}`} />
-            {data.length === 1 ? " game" : " games"}
+          <h3 className="header--results_info">
+            {"Found "}
+            <Badge text={`${data.length}`} variant="textLabel" />
+            {data.length === 1 ? " game:" : " games:"}
           </h3>
+          <div className="line--thin">&nbsp;</div>
           {data.length === 0 ? (
             <p>No results found for query: {query}</p>
           ) : (
