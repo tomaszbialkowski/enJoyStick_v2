@@ -1,5 +1,6 @@
 import "./App.css";
 import "./styles/shared/buttons.css";
+import "./styles/shared/badges.css";
 import "./styles/game_details.css";
 
 import RouterConfig from "./router/RouterConfig";

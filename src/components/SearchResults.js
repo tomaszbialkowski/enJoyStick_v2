@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import useModalActions from "../hooks/useModalActions";
 import Button from "./Button";
@@ -10,6 +11,7 @@ import { getAllGames } from "../store/selectors/selectors";
 import CoverImage from "./CoverImage";
 import { coverSize } from "../constants/coverSize";
 import { API_URL_WITH_KEY } from "../constants/apiUrl";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function SearchResults() {
   const location = useLocation();
@@ -68,7 +70,7 @@ export default function SearchResults() {
   }
 
   return (
-    <div>
+    <>
       {isLoading ? (
         <Loader />
       ) : (
@@ -83,33 +85,35 @@ export default function SearchResults() {
           ) : (
             <ul>
               {data.map((game) => (
-                <li
-                  key={game.id}
-                  onMouseEnter={() => setSelectedId(game.id)}
-                  onMouseLeave={() => setSelectedId(null)}
-                  className="gameItem"
-                >
-                  <h3 className="game_header">{game.title}</h3>
-                  <div className="imageWrapper">
-                    <CoverImage
-                      src={game.cover}
-                      title={game.title}
-                      size={coverSize.THUMB}
-                    />
-                    {selectedId === game.id &&
-                      (allGames.some((game) => game.id === selectedId) ? (
-                        <div className="game_cover--info">
-                          <p>You alredy saved this game to your collection</p>
-                        </div>
-                      ) : (
-                        <Button
-                          text={"Add Game to Your Collection"}
-                          className="btn--addToCollection"
-                          onClick={() =>
-                            handleClick({ ...game, upVotes: 0, downVotes: 0 })
-                          }
-                        />
-                      ))}
+                <li key={game.id} className="gameItem">
+                  <div className="container_main--game">
+                    <h3 className="game_header">{game.title}</h3>
+                    <div
+                      className="imageWrapper"
+                      onMouseEnter={() => setSelectedId(game.id)}
+                      onMouseLeave={() => setSelectedId(null)}
+                    >
+                      <CoverImage
+                        src={game.cover}
+                        title={game.title}
+                        size={coverSize.THUMB}
+                      />
+                      {selectedId === game.id &&
+                        (allGames.some((game) => game.id === selectedId) ? (
+                          <div className="game_cover--info">
+                            <p>You alredy saved this game to your collection</p>
+                          </div>
+                        ) : (
+                          <Button
+                            className="btn_icon btn_icon--add"
+                            onClick={() =>
+                              handleClick({ ...game, upVotes: 0, downVotes: 0 })
+                            }
+                          >
+                            <FontAwesomeIcon icon={faPlus} />
+                          </Button>
+                        ))}
+                    </div>
                   </div>
                 </li>
               ))}
@@ -117,6 +121,6 @@ export default function SearchResults() {
           )}
         </>
       )}
-    </div>
+    </>
   );
 }

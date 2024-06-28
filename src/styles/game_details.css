@@ -1,6 +1,5 @@
 .container_games {
   padding-top: var(--space_md);
-  /* margin-bottom: 200px; */
 }
 
 .game_title {
@@ -9,9 +8,9 @@
 }
 
 .game_poster--large {
-  width: 100%;
+  width: 90%;
   border-radius: 16px;
-  /* padding-bottom: var(--space_sm); */
+  margin: 0 auto;
 }
 
 .game_paragraph {
@@ -32,13 +31,18 @@
   font-weight: 400;
 }
 
-.badge.info {
-  padding: 6px 18px;
-  border: 1px solid var(--gray-300);
-  color: var(--gray-700);
-  background-color: var(--gray-100);
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  margin: 0;
+.imageWrapper .game_poster--thumb {
+  margin-top: var(--space_md);
+}
+
+.imageWrapper .game_poster--thumb:hover {
+  transform: scale(1);
+}
+
+.imageWrapper:hover img {
+  filter: brightness(0.4);
+}
+
+.gameItem > .container_main--game {
+  padding-bottom: var(--space_xxl);
 }

@@ -49,14 +49,12 @@ export default function GamesList() {
   }, [listName, navigate, isUrlListName]);
 
   return (
-    <div>
-      <ul>
-        {games.map((game) => (
-          <li key={game.id}>
-            <Game id={game.id} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {games.map((game) => (
+        <li key={game.id}>
+          <Game id={game.id} />
+        </li>
+      ))}
+    </ul>
   );
 }

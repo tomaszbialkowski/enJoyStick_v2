@@ -5,7 +5,7 @@ import { ListLabel } from "../constants/listLabels";
 import Badge from "../components/Badge";
 import { getLists, getAllGames } from "../store/selectors/selectors";
 
-export default function Lists({ path }) {
+export default function Lists() {
   const lists = useSelector(getLists);
   const allGames = useSelector(getAllGames);
   const badges = useSelector((state) => state.badgeNew);
