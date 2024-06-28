@@ -20,7 +20,7 @@ export default function CoverImage({ src, title, size }) {
 
   return (
     <img
-      className={size}
+      className={`game_poster--${size}`}
       src={path}
       alt={`Cover of ${title} game`}
       onError={handleImageError}

@@ -1,5 +1,6 @@
 import "./App.css";
-import "./css/buttons.css";
+import "./styles/shared/buttons.css";
+import "./styles/game_details.css";
 
 import RouterConfig from "./router/RouterConfig";
 import { useSelector } from "react-redux";
@@ -24,14 +25,14 @@ export default function App() {
       <Header>
         <Logo />
         <SearchBar />
-        <div>
+        <div className="buttonWrapper">
           <Button
             text={<FontAwesomeIcon icon={faInfo} />}
-            className="btn_icon--info"
+            className="btn_icon btn_icon--info"
           />
           <Button
             text={<FontAwesomeIcon icon={faUserAstronaut} />}
-            className="btn_icon--author"
+            className="btn_icon btn_icon--author"
           />
         </div>
       </Header>

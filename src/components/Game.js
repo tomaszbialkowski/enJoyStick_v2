@@ -163,14 +163,16 @@ export default function Game({ id }) {
   return (
     <div className="container_main--game">
       <Button
-        className="btn_icon--delete"
+        className="btn_icon btn_icon--delete"
         text={<FontAwesomeIcon icon={faCircleXmark} />}
         onClick={handleDeleteGame}
       />
       <h3 className="game_header">{title}</h3>
       <div className="buttonWrapper">
         <Button
-          className={`btn_icon--listHandlers ${!isFavourite ? "" : "fav"}`}
+          className={`btn_icon btn_icon--listHandlers ${
+            !isFavourite ? "" : "fav"
+          }`}
           text={<FontAwesomeIcon icon={faHeart} />}
           onClick={() =>
             handleListAction(
@@ -182,7 +184,9 @@ export default function Game({ id }) {
           }
         />
         <Button
-          className={`btn_icon--listHandlers ${!isPlayed ? "" : "played"}`}
+          className={`btn_icon btn_icon--listHandlers ${
+            !isPlayed ? "" : "played"
+          }`}
           text={<FontAwesomeIcon icon={faGamepad} />}
           onClick={() =>
             handleListAction(
@@ -194,7 +198,9 @@ export default function Game({ id }) {
           }
         />
         <Button
-          className={`btn_icon--listHandlers ${!isFinished ? "" : "finished"}`}
+          className={`btn_icon btn_icon--listHandlers ${
+            !isFinished ? "" : "finished"
+          }`}
           text={<FontAwesomeIcon icon={faTrophy} />}
           onClick={() =>
             handleListAction(
@@ -223,7 +229,7 @@ export default function Game({ id }) {
           <span>{upVotes}</span>
         </Button>
       </div>
-      <div className="borders">ENJOYSTICK</div>
+      <div className="gameCard_footer">ENJOYSTICK</div>
     </div>
   );
 }

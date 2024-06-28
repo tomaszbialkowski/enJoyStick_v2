@@ -26,6 +26,23 @@ body {
   font-weight: 300;
 }
 
+ul {
+  padding: 0;
+}
+
+img {
+  display: block;
+}
+
+ul,
+li,
+a {
+  text-decoration: none;
+  list-style-type: none;
+  text-align: left;
+  color: var(--gray-700);
+}
+
 .container__header,
 .container__main {
   display: flex;
@@ -37,13 +54,15 @@ body {
 .container__header {
   align-items: center;
   width: 100%;
-  padding-bottom: var(--space_xs);
+  padding-bottom: var(--space_md);
   padding-top: var(--space_md);
   background-color: #fff;
+  border-bottom: 1px solid var(--gray-200);
 }
 
 .container__main {
   align-items: flex-start;
+  padding-top: var(--space_sm);
 }
 
 .container__main--lists {
@@ -53,17 +72,13 @@ body {
   margin-top: var(--space_md);
 }
 
-ul {
-  padding: 0;
-}
-
 .container__main--gameslist {
   height: 100vh;
   overflow-y: scroll;
   scrollbar-width: none;
   scroll-behavior: smooth;
-  width: 340px;
-  border-radius: 32px;
+  width: 440px;
+  /* border-radius: 32px; */
   display: flex;
   justify-content: center;
 }
@@ -93,27 +108,19 @@ ul {
 }
 
 .container__main--gameslist li:last-of-type {
-  padding-bottom: 160px;
+  padding-bottom: 180px;
 }
 
-img {
-  display: block;
-}
-
-img.thumb {
+.game_poster--thumb {
   width: 200px;
   border-radius: 16px 16px 8px 8px;
   position: relative;
   z-index: 0;
+  margin-top: var(--space_sm);
 }
 
-img.thumb:hover {
+.game_poster--thumb:hover {
   transform: scale(1.02);
-}
-
-img.large {
-  width: 100%;
-  border-radius: 16px;
 }
 
 .logo {
@@ -158,7 +165,6 @@ img.large {
 .buttonWrapper {
   display: flex;
   align-items: center;
-  padding-bottom: var(--space_sm);
   gap: var(--space_xs);
 }
 
@@ -184,15 +190,6 @@ img.large {
   line-height: 1;
   letter-spacing: -3px;
   border: 2px solid var(--gray-500);
-}
-
-ul,
-li,
-a {
-  text-decoration: none;
-  list-style-type: none;
-  text-align: left;
-  color: var(--gray-700);
 }
 
 .container_main--game a {
@@ -282,12 +279,15 @@ a {
   margin-bottom: var(--space_xl);
   position: relative;
   box-shadow: 0px 0px 16px 2px rgba(51, 46, 50, 0.1);
+  width: 240px;
+  text-align: center;
 }
 
 .game_header {
   margin: 0;
   font-size: 1.5rem;
   text-wrap: balance;
+  text-align: left;
 }
 
 .imageWrapper {
@@ -321,12 +321,12 @@ a {
   padding: 0 24px;
 }
 
-.borders {
-  margin-top: 10px;
+.gameCard_footer {
+  margin-top: 4px;
   /* height: 4px; */
   border-top: 2px solid var(--gray-200);
   border-bottom: 2px solid var(--gray-200);
-  text-align: center;
-  color: var(--gray-200);
-  letter-spacing: 10px;
+  text-align: right;
+  color: var(--gray-300);
+  letter-spacing: 13px;
 }

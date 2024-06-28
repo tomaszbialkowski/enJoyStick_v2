@@ -1,6 +1,5 @@
-.btn_icon--search,
-.btn_icon--info,
-.btn_icon--author {
+/* Wspólne style dla wszystkich przycisków ikon */
+.btn_icon {
   width: var(--space_xl);
   height: var(--space_xl);
   border-radius: 50px;
@@ -8,51 +7,49 @@
   background-color: var(--gray-100);
   color: var(--gray-300);
   cursor: pointer;
-}
-
-.btn_icon--listHandlers {
-  width: var(--space_xl);
-  height: var(--space_xl);
-  border-radius: 50px;
-  border: 2px solid var(--gray-300);
-  background-color: #fff;
-  color: var(--gray-300);
-  cursor: pointer;
-  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Specyficzne style dla list handlers */
+.btn_icon--listHandlers,
+.btn_icon--back {
+  border: 2px solid var(--gray-300);
+  background-color: #fff;
+  font-size: 16px;
 }
 
 .btn_icon--listHandlers:hover,
-.btn_icon--delete:hover {
-  box-shadow: 0px 0px 24px 2px rgba(51, 46, 50, 0.1);
+.btn_icon--back:hover,
+.btn_icon--delete:hover,
+.btn_icon.votes:hover {
+  box-shadow: 0px 0px 12px 1px rgba(51, 46, 50, 0.1);
   transform: scale(1.1);
 }
 
 .btn_icon--listHandlers:active,
-.btn_icon--delete:active {
+.btn_icon--back:active,
+.btn_icon--delete:active,
+.btn_icon.votes:active {
   transform: scale(1);
   box-shadow: 0px 0px 8px 1px rgba(51, 46, 50, 0.1);
 }
 
+/* Specyficzne style dla delete button */
 .btn_icon--delete {
-  width: var(--space_lg);
-  height: var(--space_lg);
+  width: fit-content;
+  height: fit-content;
   position: absolute;
-  top: 16px;
-  right: 16px;
-  border: none;
+  padding: 0;
+  top: 20px;
+  right: 20px;
   border-radius: 8px;
   font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--gray-300);
-  background-color: #fff;
-  cursor: pointer;
 }
 
+/* Specyficzne style dla różnych stanów list handlers */
 .btn_icon--listHandlers.fav {
   color: var(--red);
   border-color: var(--red);
@@ -68,6 +65,7 @@
   border-color: var(--green);
 }
 
+/* Specyficzne style dla info i author buttons */
 .btn_icon--info,
 .btn_icon--author {
   width: var(--space_xxl);
@@ -75,34 +73,21 @@
   font-size: 1.1rem;
   margin-left: var(--space_xs);
 }
+
 .btn_icon--info:hover,
 .btn_icon--author:hover {
   color: var(--blue);
   font-size: 1.3rem;
 }
 
-.btn_icon.votes:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 0px 24px 4px rgba(51, 46, 50, 0.1);
-}
-
-.btn_icon.votes:active {
-  transform: scale(1);
-  box-shadow: 0px 0px 8px 1px rgba(51, 46, 50, 0.1);
-}
-
+/* Specyficzne style dla votes button */
 .btn_icon.votes {
   width: 58px;
   height: 58px;
-  border: none;
   border-radius: 32px;
   font-size: 1.4rem;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 2px;
-  cursor: pointer;
   background-color: #fff;
 }
 
@@ -122,26 +107,23 @@
   border: 1px solid var(--red);
 }
 
+/* Specyficzne style dla buttonWrapper */
 .buttonWrapper.votes {
   justify-content: center;
   margin-top: -36px;
-  gap: -0;
   position: relative;
   z-index: 10;
 }
 
+/* Specyficzne style dla game_score */
 .game_score span {
   font-weight: 400;
   font-size: 0.7rem;
-  letter-spacing: normal;
 }
 
+/* Specyficzne style dla addToCollection button */
 .btn--addToCollection {
   position: absolute;
   top: 45%;
   left: 8px;
-}
-
-.btn_icon--back {
-  margin-top: 25px;
 }

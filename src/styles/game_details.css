@@ -1,0 +1,44 @@
+.container_games {
+  padding-top: var(--space_md);
+  /* margin-bottom: 200px; */
+}
+
+.game_title {
+  border-bottom: 3px solid var(--gray-300);
+  padding: 0;
+}
+
+.game_poster--large {
+  width: 100%;
+  border-radius: 16px;
+  /* padding-bottom: var(--space_sm); */
+}
+
+.game_paragraph {
+  text-align: center;
+  padding: var(--space_md);
+}
+
+.game_paragraph:first-of-type {
+  padding-top: var(--space_lg);
+}
+.game_paragraph:last-of-type {
+  padding-bottom: var(--space_xl);
+}
+
+.game_paragraph--text {
+  padding-top: var(--space_sm);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.badge.info {
+  padding: 6px 18px;
+  border: 1px solid var(--gray-300);
+  color: var(--gray-700);
+  background-color: var(--gray-100);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin: 0;
+}

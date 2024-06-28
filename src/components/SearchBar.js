@@ -27,7 +27,7 @@ const SearchBar = () => {
         />
         <Button
           text={<FontAwesomeIcon icon={faMagnifyingGlass} />}
-          className="btn_icon--search"
+          className="btn_icon btn_icon--search"
         />
       </div>
     </form>

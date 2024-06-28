@@ -1,11 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "./Button";
 import { Loader } from "./Loader";
 import CoverImage from "./CoverImage";
 import { coverSize } from "../constants/coverSize";
 import { API_URL_WITH_KEY } from "../constants/apiUrl";
+import Badge from "./Badge";
 
 export default function GameDetails() {
   const navigate = useNavigate();
@@ -49,27 +52,29 @@ export default function GameDetails() {
   const renderDetail = (label, value) => {
     if (value === "N/A") return null;
     return (
-      <p>
-        <span>{label}:</span>
-        <span>{value}</span>
-      </p>
+      // <div style={{ display: "flex", alignItems: "baseline" }}>
+      <div className="game_paragraph">
+        <Badge text={label} variant="info" />
+        <div className="game_paragraph--text">{value}</div>
+      </div>
     );
   };
 
   return isLoading ? (
     <Loader />
   ) : (
-    <div>
+    <div className="container_games">
       <Button
-        text="< Back"
-        className="btn_icon--back"
+        text={<FontAwesomeIcon icon={faChevronLeft} />}
+        className="btn_icon btn_icon--back"
         onClick={() => navigate(-1)}
       />
-      <h1>{details.title}</h1>
+      <h1 className="game_title">{details.title}</h1>
       <CoverImage
         src={details.poster}
         title={details.title}
         size={coverSize.LARGE}
+        className="game_poster--large"
       />
       {renderDetail("Plot", details.plot)}
       {renderDetail("Genre", details.genre)}
@@ -80,6 +85,15 @@ export default function GameDetails() {
       {renderDetail("Starring", details.actors)}
       {renderDetail("Awards", details.awards)}
       {renderDetail("Rating", details.rating)}
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
     </div>
   );
 }
