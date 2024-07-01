@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.1s, box-shadow 0.1s;
+  transition: all 0.1s;
 }
 
 .btn_icon--listHandlers,

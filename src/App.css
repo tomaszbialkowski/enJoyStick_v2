@@ -209,8 +209,8 @@ a {
 
 .modal {
   position: absolute;
-  top: 12%;
-  right: 0;
+  top: 10%;
+  left: 47%;
   width: 20rem;
   z-index: 200;
   background-color: #fff;
