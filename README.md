@@ -1,3 +1,4 @@
+------------
 ## Aby uruchomić projekt:
 
 1. W folderze projektu utwórz plik .env
