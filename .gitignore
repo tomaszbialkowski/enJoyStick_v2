@@ -27,3 +27,5 @@ yarn-error.log*
 
 # iniial data
 src/initialData.js
+roboczy_enjoystick.txt
+enjoystikc_snippets.txt
