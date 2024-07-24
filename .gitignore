@@ -25,7 +25,7 @@ yarn-error.log*
 # env
 .env
 
-# iniial data
+# initial data
 src/initialData.js
 roboczy_enjoystick.txt
 enjoystikc_snippets.txt
